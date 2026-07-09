@@ -34,9 +34,22 @@ if uploaded_file is not None:
     transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
     input_tensor = transform(image).unsqueeze(0)
     
-    # Predicción
+    # Predicción (dentro de tu bloque 'if uploaded_file is not None:')
     with torch.no_grad():
         output = model(input_tensor)
         _, predicted = torch.max(output, 1)
-        clases = ['enfermo', 'sano']
-        st.write(f"Resultado: {clases[predicted.item()]}")
+        clases = ['Enfermo', 'Sano']
+        resultado = clases[predicted.item()]
+        
+        # Aquí empieza el diseño con columnas
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.image(image, caption='Imagen subida', use_column_width=True)
+            
+        with col2:
+            st.subheader("Diagnóstico:")
+            if resultado == 'Enfermo':
+                st.error(f"⚠️ Resultado: {resultado}")
+            else:
+                st.success(f"✅ Resultado: {resultado}")
