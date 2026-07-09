@@ -127,7 +127,7 @@ with col2:
             st.error(f"⚠️ Resultado: {resultado}")
         else:
             st.success(f"✅ Resultado: {resultado}")
-        if uploaded_file is not None and boton_analizar:
+    if uploaded_file is not None and boton_analizar:
         # ... (toda tu lógica de predicción que ya tienes)
         
         # Agrega este pequeño separador visual al final
