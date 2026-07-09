@@ -95,7 +95,7 @@ st.markdown("<h1>Plant Doctor IA</h1>", unsafe_allow_html=True)
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    st.subheader("Beneficios de las hojas de tomates")
+    st.subheader("Beneficios de las hojas de tomates:")
     st.markdown("<div class='cards-container'>", unsafe_allow_html=True)
     beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas."), ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."), ("🖊️ CICATRIZACIÓN", "Sus propiedades naturales ayudan en compresas para acelerar la recuperación de heridas cutáneas leves."), ("🌱 FERTILIZANTE ORGANICO", "Integradas en composta, aportan nutrientes esenciales para fortalecer el sustrato de tu huerto.")]
     for t, d in beneficios:
