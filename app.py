@@ -55,12 +55,13 @@ col_info, col_diag = st.columns([1, 1])
 
 with col_info:
     st.subheader("Beneficios de las hojas")
-    beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas.."), ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."), ("🖊️ CICATRIZACIÓN", "Sus propiedades naturales ayudan en compresas para acelerar la recuperación de heridas cutáneas leves."), ("🌱 FERTILIZANTE ORGANICO", "Integradas en composta, aportan nutrientes esenciales para fortalecer el sustrato de tu huerto.")]
+    beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas."), ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."), ("🖊️ CICATRIZACIÓN", "Sus propiedades naturales ayudan en compresas para acelerar la recuperación de heridas cutáneas leves."), ("🌱 FERTILIZANTE ORGANICO", "Integradas en composta, aportan nutrientes esenciales para fortalecer el sustrato de tu huerto.")]
     for t, d in beneficios:
         st.markdown(f"<div class='card'><b>{t}</b><br>{d}</div>", unsafe_allow_html=True)
 
 with col_diag:
     st.subheader("Diagnóstico al Instante")
+    st.markdown("<p style='color: #7cfc00; font-weight: bold;'>¡Selecciona o arrastra una foto de la hoja para analizar!</p>", unsafe_allow_html=True)
     uploaded_file = st.file_uploader("Sube una foto de la hoja del tomate para analizar", type=['jpg', 'png'])
     
     if uploaded_file is not None:
