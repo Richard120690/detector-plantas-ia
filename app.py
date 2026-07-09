@@ -39,7 +39,7 @@ st.markdown("""
         margin-bottom: 8px;   /* Menos espacio entre tarjetas */
         border: 1px solid #444; 
         font-size: 14px;
-        max-width: 280px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
+        max-width: 350px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
         margin-left: auto;
         margin-right: auto;
     }
