@@ -82,7 +82,7 @@ st.markdown("""
 # 3. Interfaz
 st.markdown("<h1>Plant Doctor IA</h1>", unsafe_allow_html=True)
 
-col1, col2 = st.columns([1, 1.2])
+col1, col2 = st.columns([1, 1])
 
 with col1:
     st.subheader("Beneficios de las hojas")
