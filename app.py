@@ -70,7 +70,7 @@ st.markdown("""
         color: white !important;
         border: none !important;
         padding: 30px 20px !important;
-        font-size: 2.5rem !important;
+        font-size: 3.5rem !important;
         font-weight: bold;
         border-radius: 12px;
         cursor: pointer;
