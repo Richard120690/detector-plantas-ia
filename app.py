@@ -32,7 +32,15 @@ model = load_model()
 st.markdown("""
     <style>
     .stApp { background-color: #1a1a1a; color: white; }
-    .card { background-color: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #444; }
+    .card { 
+            background-color: #2d2d2d; 
+            padding: 10px;        /* Reducimos el relleno interno (antes era 20px) */
+            border-radius: 8px;   /* Bordes ligeramente menos redondeados */
+            margin-bottom: 8px;   /* Menos espacio entre tarjetas */
+            border: 1px solid #444; 
+            font-size: 14px;
+    }
+    .card b { font-size: 13px; color: #7cfc00; }
     h1 { color: #2e8b57; }
     </style>
 """, unsafe_allow_html=True)
