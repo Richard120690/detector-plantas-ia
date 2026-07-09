@@ -35,18 +35,25 @@ st.markdown("""
     .stApp { background-color: #121212; color: #e0e0e0; }
     
     /* Títulos principales */
-    h1 { color: #4CAF50 !important; text-align: center; margin-bottom: 30px; }
-    h3 { color: #ffffff !important; }
+    h1 { color: #4CAF50 !important; text-align: center; margin-bottom: 40px; }
+    h3 { color: #ffffff !important; font-size: 1.8rem !important; }
 
     /* Tarjetas de beneficios */
     .card { 
         background-color: #1e1e1e; 
-        padding: 15px; 
+        padding: 20px; 
         border-radius: 12px; 
-        margin-bottom: 12px; 
-        border-left: 5px solid #4CAF50;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        margin-bottom: 15px; 
+        border-left: 6px solid #4CAF50;
+        box-shadow: 3px 3px 15px rgba(0,0,0,0.4);
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;    
     }
+     /* Texto dentro de las tarjetas */
+    .card b { font-size: 1.2rem !important; color: #81c784; display: block; margin-bottom: 8px; }
+    .card div { font-size: 1rem !important; line-height: 1.5; }
     
     /* Botones verdes profesionales */
     div.stButton > button {
@@ -54,7 +61,7 @@ st.markdown("""
         color: white !important;
         border: none !important;
         width: 100%;
-        padding: 10px;
+        padding: 15px;
         font-weight: bold;
         border-radius: 8px;
     }
