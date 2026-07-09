@@ -58,7 +58,7 @@ with col_info:
 
 with col_diag:
     st.subheader("Diagnóstico al Instante")
-    uploaded_file = st.file_uploader("Sube una foto de la hoja", type=['jpg', 'png'])
+    uploaded_file = st.file_uploader("Sube una foto de la hoja del tomate para analizar", type=['jpg', 'png'])
     
     if uploaded_file is not None:
         image = Image.open(uploaded_file).convert('RGB')
