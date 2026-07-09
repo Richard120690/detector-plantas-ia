@@ -31,56 +31,47 @@ model = load_model()
 # 2. Estilo CSS
 st.markdown("""
     <style>
-    .stApp { background-color: #1a1a1a; color: white; }
+    /* Fondo oscuro global */
+    .stApp { background-color: #121212; color: #e0e0e0; }
+    
+    /* Títulos principales */
+    h1 { color: #4CAF50 !important; text-align: center; margin-bottom: 30px; }
+    h3 { color: #ffffff !important; }
 
-    /* Botón de Analizar */
+    /* Tarjetas de beneficios */
+    .card { 
+        background-color: #1e1e1e; 
+        padding: 15px; 
+        border-radius: 12px; 
+        margin-bottom: 12px; 
+        border-left: 5px solid #4CAF50;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    /* Botones verdes profesionales */
     div.stButton > button {
-        background-color: #2e8b57 !important;
+        background-color: #4CAF50 !important;
         color: white !important;
         border: none !important;
         width: 100%;
+        padding: 10px;
         font-weight: bold;
-    }
-
-    /* FORZAR visibilidad del File Uploader */
-    .stFileUploader {
-        color: #ffffff !important;
+        border-radius: 8px;
     }
     
-    /* Esta línea es la clave: cambia el color de fondo y texto del cuadro */
-    .stFileUploader div[role="presentation"] {
-        background-color: #2d2d2d !important;
-        color: #ffffff !important;
-        border: 2px dashed #2e8b57 !important;
+    /* Ajuste del Uploader para que se vea bien en oscuro */
+    [data-testid="stFileUploader"] {
+        background-color: #1e1e1e !important;
+        border: 2px dashed #4CAF50 !important;
+        border-radius: 10px;
     }
-    
-    /* Cambia el color del texto "Drag and drop" */
-    .stFileUploader section div div {
-        color: #ffffff !important;
-    }
-
-    .card { 
-        background-color: #2d2d2d; 
-        padding: 15px; 
-        border-radius: 10px; 
-        margin-bottom: 10px; 
-        border: 1px solid #444; 
-        font-size: 14px;
-        max-width: 300px; 
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center; 
-    }
-    
-    .card b { font-size: 13px; color: #7cfc00; display: block; margin-bottom: 5px; }
-    h1 { color: #2e8b57 !important; } 
     </style>
 """, unsafe_allow_html=True)
 
 # 3. Interfaz
-st.markdown("<h1 style='text-align: center;'>Plant Doctor IA</h1>", unsafe_allow_html=True)
+st.markdown("<h1>Plant Doctor IA</h1>", unsafe_allow_html=True)
 
-col_info, col_diag = st.columns([1, 1])
+col1, col2 = st.columns([1, 1.2])
 
 with col_info:
     st.subheader("Beneficios de las hojas")
