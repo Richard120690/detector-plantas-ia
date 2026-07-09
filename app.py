@@ -73,13 +73,13 @@ st.markdown("<h1>Plant Doctor IA</h1>", unsafe_allow_html=True)
 
 col1, col2 = st.columns([1, 1.2])
 
-with col_1:
+with col1:
     st.subheader("Beneficios de las hojas")
     beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas."), ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."), ("🖊️ CICATRIZACIÓN", "Sus propiedades naturales ayudan en compresas para acelerar la recuperación de heridas cutáneas leves."), ("🌱 FERTILIZANTE ORGANICO", "Integradas en composta, aportan nutrientes esenciales para fortalecer el sustrato de tu huerto.")]
     for t, d in beneficios:
         st.markdown(f"<div class='card'><b>{t}</b><br>{d}</div>", unsafe_allow_html=True)
 
-with col_2:
+with col2:
     st.subheader("Diagnóstico al Instante")
     st.markdown("<p style='color: #7cfc00; font-weight: bold;'>¡Selecciona o arrastra una foto de la hoja para analizar!</p>", unsafe_allow_html=True)
     
