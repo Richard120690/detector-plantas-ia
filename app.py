@@ -52,7 +52,7 @@ col_info, col_diag = st.columns([1, 1])
 
 with col_info:
     st.subheader("Beneficios de las hojas")
-    beneficios = [("🌿 INSECTICIDA", "Solanina, repelente natural."), ("☕ INFUSIÓN", "Antiinflamatorio."), ("🖊️ CICATRIZACIÓN", "Recuperación cutánea."), ("🌱 FERTILIZANTE", "Nutrientes esenciales.")]
+    beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas.."), ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."), ("🖊️ CICATRIZACIÓN", "Sus propiedades naturales ayudan en compresas para acelerar la recuperación de heridas cutáneas leves."), ("🌱 FERTILIZANTE ORGANICO", "Integradas en composta, aportan nutrientes esenciales para fortalecer el sustrato de tu huerto.")]
     for t, d in beneficios:
         st.markdown(f"<div class='card'><b>{t}</b><br>{d}</div>", unsafe_allow_html=True)
 
