@@ -5,56 +5,69 @@ import torchvision.transforms as transforms
 from PIL import Image
 import requests
 import os
-import streamlit as st
 
-# 1. Descargar modelo del Release de GitHub
-MODEL_URL = 'https://github.com/Richard120690/detector-plantas-ia/releases/download/v1.0/modelo_tomates.pth'
-local_filename = 'modelo_tomates.pth'
-
-if not os.path.exists(local_filename):
-    response = requests.get(MODEL_URL)
-    with open(local_filename, 'wb') as f:
-        f.write(response.content)
-
-# 2. Cargar modelo
-device = torch.device("cpu")
-model = models.resnet18(weights=None)
-model.fc = torch.nn.Linear(model.fc.in_features, 2)
-model.load_state_dict(torch.load(local_filename, map_location=device))
-model.eval()
-
-# Configuración de página ancha para aprovechar el espacio
+# Configuración de página
 st.set_page_config(layout="wide")
 
-# Estilo personalizado para el diseño oscuro
+# 1. Cargar Modelo (con caché para que no se descargue cada vez)
+@st.cache_resource
+def load_model():
+    MODEL_URL = 'https://github.com/Richard120690/detector-plantas-ia/releases/download/v1.0/modelo_tomates.pth'
+    local_filename = 'modelo_tomates.pth'
+    if not os.path.exists(local_filename):
+        response = requests.get(MODEL_URL)
+        with open(local_filename, 'wb') as f:
+            f.write(response.content)
+    
+    device = torch.device("cpu")
+    model = models.resnet18(weights=None)
+    model.fc = torch.nn.Linear(model.fc.in_features, 2)
+    model.load_state_dict(torch.load(local_filename, map_location=device))
+    model.eval()
+    return model
+
+model = load_model()
+
+# 2. Estilo CSS
 st.markdown("""
     <style>
     .stApp { background-color: #1a1a1a; color: white; }
-    .card { background-color: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 10px; }
+    .card { background-color: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #444; }
     h1 { color: #2e8b57; }
     </style>
 """, unsafe_allow_html=True)
 
-# Encabezado
+# 3. Interfaz
 st.markdown("<h1 style='text-align: center;'>Plant Doctor IA</h1>", unsafe_allow_html=True)
 
-# Crear dos columnas principales
 col_info, col_diag = st.columns([1, 1])
 
 with col_info:
     st.subheader("Beneficios de las hojas")
-    # Creamos las "tarjetas" informativas
-    beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas."),
-                  ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."),
-                  ("🖊️ CICATRIZACIÓN", "Propiedades para la recuperación de heridas."),
-                  ("🌱 FERTILIZANTE", "Aportan nutrientes esenciales.")]
-    for titulo, desc in beneficios:
-        st.markdown(f"<div class='card'><b>{titulo}</b><br>{desc}</div>", unsafe_allow_html=True)
+    beneficios = [("🌿 INSECTICIDA", "Solanina, repelente natural."), ("☕ INFUSIÓN", "Antiinflamatorio."), ("🖊️ CICATRIZACIÓN", "Recuperación cutánea."), ("🌱 FERTILIZANTE", "Nutrientes esenciales.")]
+    for t, d in beneficios:
+        st.markdown(f"<div class='card'><b>{t}</b><br>{d}</div>", unsafe_allow_html=True)
 
 with col_diag:
     st.subheader("Diagnóstico al Instante")
-    # Tu lógica de carga de archivo aquí...
     uploaded_file = st.file_uploader("Sube una foto de la hoja", type=['jpg', 'png'])
-    if uploaded_file:
-        # Aquí llamarías a tu función de predicción
-        st.success("Analizando...")
+    
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file).convert('RGB')
+        st.image(image, caption='Imagen subida', use_column_width=True)
+        
+        # Preprocesamiento y Predicción
+        transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
+        input_tensor = transform(image).unsqueeze(0)
+        
+        with st.spinner('Analizando...'):
+            with torch.no_grad():
+                output = model(input_tensor)
+                _, predicted = torch.max(output, 1)
+                clases = ['Enfermo', 'Sano']
+                resultado = clases[predicted.item()]
+        
+        if resultado == 'Enfermo':
+            st.error(f"⚠️ Resultado: {resultado}")
+        else:
+            st.success(f"✅ Resultado: {resultado}")
