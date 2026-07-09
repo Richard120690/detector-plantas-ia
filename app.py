@@ -28,7 +28,6 @@ uploaded_file = st.file_uploader("Sube una foto de la hoja", type=['jpg', 'png']
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert('RGB')
-    st.image(image, caption='Imagen subida', use_column_width=True)
     
     # Preprocesamiento
     transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
