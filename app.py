@@ -38,7 +38,10 @@ st.markdown("""
             border-radius: 8px;   /* Bordes ligeramente menos redondeados */
             margin-bottom: 8px;   /* Menos espacio entre tarjetas */
             border: 1px solid #444; 
-            font-size: 14px;
+            font-size: 14px;}
+            max-width: 350px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
+            margin-left: auto;
+            margin-right: auto;
     }
     .card b { font-size: 13px; color: #7cfc00; }
     h1 { color: #2e8b57; }
