@@ -73,6 +73,10 @@ st.markdown("""
         font-size: 3.5rem !important;
         font-weight: bold;
         border-radius: 12px;
+        display: block
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
         cursor: pointer;
     }
 </style>
@@ -91,6 +95,7 @@ with col1:
         st.markdown(f"<div class='card'><b>{t}</b><br>{d}</div>", unsafe_allow_html=True)
 
 with col2:
+    st.markdown("<br>", unsafe_allow_html=True)
     st.subheader("Diagnóstico al Instante")
     st.markdown("<p style='color: #7cfc00; font-weight: bold;'>¡Selecciona o arrastra una foto de la hoja para analizar!</p>", unsafe_allow_html=True)
     
@@ -122,3 +127,9 @@ with col2:
             st.error(f"⚠️ Resultado: {resultado}")
         else:
             st.success(f"✅ Resultado: {resultado}")
+        if uploaded_file is not None and boton_analizar:
+        # ... (toda tu lógica de predicción que ya tienes)
+        
+        # Agrega este pequeño separador visual al final
+        st.markdown("---")
+        st.info("💡 Consejo: Asegúrate de que la hoja tenga buena luz para un diagnóstico más preciso.")
