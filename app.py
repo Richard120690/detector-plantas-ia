@@ -132,14 +132,22 @@ with col2:
                 resultado = clases[predicted.item()]
                 confianza_porcentaje = confidence.item() * 100
         
-        # Resultado final
+        # Resultado final con confianza
         if resultado == 'Enfermo':
-            st.markdown(f"<div class='big-font' style='color: #ff4b4b; border: 2px solid #ff4b4b; border-radius: 10px;'>⚠️ Resultado: {resultado}</div>", unsafe_allow_html=True)
-            <span style='font-size: 1.2rem;'>Confianza: {confianza_porcentaje:.2f}{"%"}</span>
+            st.markdown(f"""
+                <div class='big-font' style='color: #ff4b4b; border: 2px solid #ff4b4b; border-radius: 10px; text-align: center; padding: 20px;'>
+                    ⚠️ Resultado: {resultado} <br>
+                    <span style='font-size: 1.2rem;'>Confianza: {confianza_porcentaje:.2f}%</span>
+                </div>
+            """, unsafe_allow_html=True)
             
         else:
-            st.markdown(f"<div class='big-font' style='color: #4CAF50; border: 2px solid #4CAF50; border-radius: 10px;'>✅ Resultado: {resultado}</div>", unsafe_allow_html=True)
-            <span style='font-size: 1.2rem;'>Confianza: {confianza_porcentaje:.2f}{"%"}</span>
+            st.markdown(f"""
+                <div class='big-font' style='color: #4CAF50; border: 2px solid #4CAF50; border-radius: 10px; text-align: center; padding: 20px;'>
+                    ✅ Resultado: {resultado} <br>
+                    <span style='font-size: 1.2rem;'>Confianza: {confianza_porcentaje:.2f}%</span>
+                </div>
+            """, unsafe_allow_html=True)
             
     if uploaded_file is not None and boton_analizar:
         # ... (toda tu lógica de predicción que ya tienes)
