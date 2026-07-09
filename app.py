@@ -33,15 +33,15 @@ st.markdown("""
     <style>
     .stApp { background-color: #1a1a1a; color: white; }
     .card { 
-            background-color: #2d2d2d; 
-            padding: 10px;        /* Reducimos el relleno interno (antes era 20px) */
-            border-radius: 8px;   /* Bordes ligeramente menos redondeados */
-            margin-bottom: 8px;   /* Menos espacio entre tarjetas */
-            border: 1px solid #444; 
-            font-size: 14px;}
-            max-width: 280px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
-            margin-left: auto;
-            margin-right: auto;
+        background-color: #2d2d2d; 
+        padding: 10px;        /* Reducimos el relleno interno (antes era 20px) */
+        border-radius: 8px;   /* Bordes ligeramente menos redondeados */
+        margin-bottom: 8px;   /* Menos espacio entre tarjetas */
+        border: 1px solid #444; 
+        font-size: 14px;}
+        max-width: 280px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
+        margin-left: auto;
+        margin-right: auto;
     }
     .card b { font-size: 13px; color: #7cfc00; }
     h1 { color: #2e8b57; }
