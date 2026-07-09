@@ -30,49 +30,53 @@ model = load_model()
 
 # 2. Estilo CSS
 st.markdown("""
-    <style>
+ <style>
     /* Fondo oscuro global */
     .stApp { background-color: #121212; color: #e0e0e0; }
     
-    /* Títulos principales */
-    h1 { color: #4CAF50 !important; text-align: center; margin-bottom: 40px; }
-    h3 { color: #ffffff !important; font-size: 1.8rem !important; }
+    /* Título principal */
+    h1 { color: #4CAF50 !important; text-align: center; font-size: 3rem !important; margin-bottom: 30px; }
+    
+    /* Subtítulos */
+    h3 { color: #ffffff !important; font-size: 1.5rem !important; margin-bottom: 20px; }
 
-    /* Tarjetas de beneficios */
+    /* Contenedor principal de tarjetas - Centrado automático */
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Tarjetas - Tamaño ajustado para que no se desborden */
     .card { 
         background-color: #1e1e1e; 
         padding: 20px; 
         border-radius: 12px; 
-        margin-bottom: 15px; 
         border-left: 6px solid #4CAF50;
         box-shadow: 3px 3px 15px rgba(0,0,0,0.4);
-        max-width: 350px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;    
+        width: 100%; 
+        max-width: 400px; /* Tamaño máximo para que no se vean infinitas */
+        text-align: center;
     }
-     /* Texto dentro de las tarjetas */
-    .card b { font-size: 1.2rem !important; color: #81c784; display: block; margin-bottom: 8px; }
-    .card div { font-size: 1rem !important; line-height: 1.5; }
     
-    /* Botones verdes profesionales */
+    /* Tipografía de las tarjetas */
+    .card b { font-size: 1.3rem !important; color: #81c784; display: block; margin-bottom: 10px; }
+    .card div { font-size: 1.1rem !important; line-height: 1.4; }
+    
+    /* Botones */
     div.stButton > button {
         background-color: #4CAF50 !important;
         color: white !important;
         border: none !important;
         width: 100%;
-        padding: 15px;
+        max-width: 400px; /* Alineado al ancho de las tarjetas */
+        padding: 12px !important;
+        font-size: 1.2rem !important;
         font-weight: bold;
         border-radius: 8px;
     }
-    
-    /* Ajuste del Uploader para que se vea bien en oscuro */
-    [data-testid="stFileUploader"] {
-        background-color: #1e1e1e !important;
-        border: 2px dashed #4CAF50 !important;
-        border-radius: 10px;
-    }
-    </style>
+</style>
 """, unsafe_allow_html=True)
 
 # 3. Interfaz
@@ -82,6 +86,7 @@ col1, col2 = st.columns([1, 1.2])
 
 with col1:
     st.subheader("Beneficios de las hojas")
+    st.markdown("<div class='cards-container'>", unsafe_allow_html=True)
     beneficios = [("🌿 INSECTICIDA NATURAL", "Contienen solanina, repelente natural contra plagas."), ("☕ INFUSIÓN MEDICINAL", "Antiinflamatorio y alivio gastrointestinal."), ("🖊️ CICATRIZACIÓN", "Sus propiedades naturales ayudan en compresas para acelerar la recuperación de heridas cutáneas leves."), ("🌱 FERTILIZANTE ORGANICO", "Integradas en composta, aportan nutrientes esenciales para fortalecer el sustrato de tu huerto.")]
     for t, d in beneficios:
         st.markdown(f"<div class='card'><b>{t}</b><br>{d}</div>", unsafe_allow_html=True)
