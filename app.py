@@ -1,81 +1,42 @@
+import streamlit as st
 import torch
-import torch.nn as nn
-from torchvision import models, transforms
-from fastapi import FastAPI, File, UploadFile, Request
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
+import torchvision.models as models
+import torchvision.transforms as transforms
 from PIL import Image
-import io
+import requests
+import os
 
-app = FastAPI()
-# Estas dos líneas le dicen a FastAPI dónde están tus archivos:
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
-# ... (mantén tus mounts y templates igual)
+# 1. Descargar modelo del Release de GitHub
+MODEL_URL = 'https://github.com/Richard120690/detector-plantas-ia/releases/download/v1.0/modelo_tomates.pth'
+local_filename = 'modelo_tomates.pth'
 
-# 1. Definir nombres de clases (ya no necesitas leer clases.txt si quieres, 
-# puedes definirlos directamente para evitar errores de orden)
-lista_clases = ['enfermo', 'sano'] # Asegúrate que el orden coincida con tu carpeta de entrenamiento
+if not os.path.exists(local_filename):
+    response = requests.get(MODEL_URL)
+    with open(local_filename, 'wb') as f:
+        f.write(response.content)
 
-# 2. Arquitectura del modelo (RESNET18)
+# 2. Cargar modelo
 device = torch.device("cpu")
 model = models.resnet18(weights=None)
-model.fc = nn.Linear(model.fc.in_features, 2) # ¡IMPORTANTE! 2 clases, no num_clases de 1000
-model.load_state_dict(torch.load('modelo_tomates.pth', map_location=device))
+model.fc = torch.nn.Linear(model.fc.in_features, 2)
+model.load_state_dict(torch.load(local_filename, map_location=device))
 model.eval()
 
-# 3. Transformaciones para INFERENCIA (sin cosas aleatorias)
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-])
+# 3. Interfaz de Streamlit
+st.title("Detector de Salud de Plantas")
+uploaded_file = st.file_uploader("Sube una foto de la hoja", type=['jpg', 'png'])
 
-# --- ESTA RUTA ES LA QUE TE FALTA ---
-@app.get("/")
-async def home(request: Request):
-    return templates.TemplateResponse(
-        request=request, 
-        name="index.html"
-    )
-
-from fastapi import HTTPException
-
-@app.post("/predict")
-async def predict(file: UploadFile = File(...)):
-    # 1. Validación de seguridad en Backend
-    if not file.content_type.startswith('image/'):
-        raise HTTPException(
-            status_code=400, 
-            detail="Formato no válido. Por favor, sube solo imágenes (jpg, png, etc.)."
-        )
+if uploaded_file is not None:
+    image = Image.open(uploaded_file).convert('RGB')
+    st.image(image, caption='Imagen subida', use_column_width=True)
     
-    try:
-        # 2. Procesamiento seguro
-        contents = await file.read()
-        img = Image.open(io.BytesIO(contents)).convert('RGB')
-        img_t = transform(img).unsqueeze(0).to(device)
-        
-        with torch.no_grad():
-            output = model(img_t)
-            probabilidades = torch.nn.functional.softmax(output[0], dim=0)
-            confianza, predicted = torch.max(probabilidades, 0)
-            
-        nombre_estado = lista_clases[predicted.item()]
-        
-        return {
-            "estado": nombre_estado,
-            "confianza": f"{confianza.item()*100:.2f}%"
-        }
-    except Exception as e:
-        # Captura cualquier error técnico (ej. archivo corrupto)
-        raise HTTPException(status_code=500, detail=f"Error al procesar la imagen: {str(e)}")
-
-
-
-
-if __name__ == "__main__":
-
-    import uvicorn
-
-    uvicorn.run(app, host="127.0.0.1", port=8000) 
+    # Preprocesamiento
+    transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
+    input_tensor = transform(image).unsqueeze(0)
+    
+    # Predicción
+    with torch.no_grad():
+        output = model(input_tensor)
+        _, predicted = torch.max(output, 1)
+        clases = ['enfermo', 'sano']
+        st.write(f"Resultado: {clases[predicted.item()]}")
