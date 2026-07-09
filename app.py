@@ -63,16 +63,17 @@ with col_info:
 with col_diag:
     st.subheader("Diagnóstico al Instante")
     st.markdown("<p style='color: #7cfc00; font-weight: bold;'>¡Selecciona o arrastra una foto de la hoja para analizar!</p>", unsafe_allow_html=True)
-    uploaded_file = st.file_uploader("Sube una foto de la hoja del tomate para analizar", type=['jpg', 'png'])
-    # 1. Creamos un botón de acción
+    
+    uploaded_file = st.file_uploader("", type=['jpg', 'png'])
+    
+    # 1. El botón de acción
     boton_analizar = st.button("Analizar Hoja")
+    
+    # 2. Toda la lógica ocurre SOLO cuando hay archivo Y presionas el botón
     if uploaded_file is not None and boton_analizar:
         image = Image.open(uploaded_file).convert('RGB')
-        # ... resto de tu lógica de predicción ...
-        st.success(f"Resultado: {resultado}")
-     
-    if uploaded_file is not None:
-        image = Image.open(uploaded_file).convert('RGB')
+        
+        # Mostramos la imagen justo al analizar
         st.image(image, caption='Imagen subida', use_column_width=True)
         
         # Preprocesamiento y Predicción
@@ -86,6 +87,7 @@ with col_diag:
                 clases = ['Enfermo', 'Sano']
                 resultado = clases[predicted.item()]
         
+        # Resultado final
         if resultado == 'Enfermo':
             st.error(f"⚠️ Resultado: {resultado}")
         else:
