@@ -42,6 +42,7 @@ st.markdown("""
         max-width: 700px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
         margin-left: auto;
         margin-right: auto;
+        text-align: center;
     }
     .card b { font-size: 13px; color: #7cfc00; }
     h1 { color: #2e8b57; }
