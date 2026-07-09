@@ -32,36 +32,48 @@ model = load_model()
 st.markdown("""
     <style>
     .stApp { background-color: #1a1a1a; color: white; }
+
+    /* Botón de Analizar */
     div.stButton > button {
-        background-color: #2e8b57 !important; /* Verde profesional */
+        background-color: #2e8b57 !important;
         color: white !important;
         border: none !important;
-        width: 100%; /* Para que ocupe el ancho del contenedor */
+        width: 100%;
         font-weight: bold;
-    }  
-    /* Estilo para el botón de carga (File Uploader) */
+    }
+
+    /* FORZAR visibilidad del File Uploader */
     .stFileUploader {
-        color: white !important;
-    }    
-    /* Esto ayuda a que el texto del uploader sea visible */
-    [data-testid="stFileUploader"] section {
+        color: #ffffff !important;
+    }
+    
+    /* Esta línea es la clave: cambia el color de fondo y texto del cuadro */
+    .stFileUploader div[role="presentation"] {
         background-color: #2d2d2d !important;
+        color: #ffffff !important;
         border: 2px dashed #2e8b57 !important;
     }
+    
+    /* Cambia el color del texto "Drag and drop" */
+    .stFileUploader section div div {
+        color: #ffffff !important;
+    }
+
     .card { 
         background-color: #2d2d2d; 
-        padding: 10px;        /* Reducimos el relleno interno (antes era 20px) */
-        border-radius: 8px;   /* Bordes ligeramente menos redondeados */
-        margin-bottom: 8px;   /* Menos espacio entre tarjetas */
+        padding: 15px; 
+        border-radius: 10px; 
+        margin-bottom: 10px; 
         border: 1px solid #444; 
         font-size: 14px;
-        max-width: 700px; /* Ajusta este número (ej. 300px o 400px) a tu gusto */
+        max-width: 300px; 
         margin-left: auto;
         margin-right: auto;
-        text-align: center;
+        text-align: center; 
     }
-    .card b { font-size: 13px; color: #7cfc00; }
-    h1 { color: #2e8b57; }
+    
+    .card b { font-size: 13px; color: #7cfc00; display: block; margin-bottom: 5px; }
+    h1 { color: #2e8b57 !important; } 
     </style>
 """, unsafe_allow_html=True)
 
