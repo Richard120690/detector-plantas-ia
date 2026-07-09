@@ -32,6 +32,22 @@ model = load_model()
 st.markdown("""
     <style>
     .stApp { background-color: #1a1a1a; color: white; }
+    div.stButton > button {
+        background-color: #2e8b57 !important; /* Verde profesional */
+        color: white !important;
+        border: none !important;
+        width: 100%; /* Para que ocupe el ancho del contenedor */
+        font-weight: bold;
+    }  
+    /* Estilo para el botón de carga (File Uploader) */
+    .stFileUploader {
+        color: white !important;
+    }    
+    /* Esto ayuda a que el texto del uploader sea visible */
+    [data-testid="stFileUploader"] section {
+        background-color: #2d2d2d !important;
+        border: 2px dashed #2e8b57 !important;
+    }
     .card { 
         background-color: #2d2d2d; 
         padding: 10px;        /* Reducimos el relleno interno (antes era 20px) */
