@@ -71,10 +71,10 @@ st.markdown("""
         border: none !important;
         width: 100%;
         max-width: 400px; /* Alineado al ancho de las tarjetas */
-        padding: 12px !important;
-        font-size: 1.2rem !important;
+        padding: 20px 30px !important;
+        font-size: 1.5rem !important;
         font-weight: bold;
-        border-radius: 8px;
+        border-radius: 12px;
     }
 </style>
 """, unsafe_allow_html=True)
