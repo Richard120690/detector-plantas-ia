@@ -69,10 +69,9 @@ st.markdown("""
         background-color: #4CAF50 !important;
         color: white !important;
         border: none !important;
-        width: 100%;
-        max-width: 400px; /* Alineado al ancho de las tarjetas */
-        padding: 20px 30px !important;
-        font-size: 4.8rem !important;
+        
+        padding: 30px 20px !important;
+        font-size: 2.5rem !important;
         font-weight: bold;
         border-radius: 12px;
     }
