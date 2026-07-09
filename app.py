@@ -69,11 +69,11 @@ st.markdown("""
         background-color: #4CAF50 !important;
         color: white !important;
         border: none !important;
-        
         padding: 30px 20px !important;
         font-size: 2.5rem !important;
         font-weight: bold;
         border-radius: 12px;
+        cursor: pointer;
     }
 </style>
 """, unsafe_allow_html=True)
