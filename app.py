@@ -79,6 +79,13 @@ st.markdown("""
         margin-right: auto;
         cursor: pointer;
     }
+    /* Ajuste para el texto de resultado */
+    .big-font {
+        font-size: 2.5rem !important;
+        font-weight: bold !important;
+        text-align: center;
+        padding: 20px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -124,8 +131,10 @@ with col2:
         
         # Resultado final
         if resultado == 'Enfermo':
+            st.markdown(f"<div class='big-font' style='color: #ff4b4b; border: 2px solid #ff4b4b; border-radius: 10px;'>⚠️ Resultado: {resultado}</div>", unsafe_allow_html=True)
             st.error(f"⚠️ Resultado: {resultado}")
         else:
+            st.markdown(f"<div class='big-font' style='color: #4CAF50; border: 2px solid #4CAF50; border-radius: 10px;'>✅ Resultado: {resultado}</div>", unsafe_allow_html=True)
             st.success(f"✅ Resultado: {resultado}")
     if uploaded_file is not None and boton_analizar:
         # ... (toda tu lógica de predicción que ya tienes)
